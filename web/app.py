@@ -58,7 +58,7 @@ def delete_city(city_name):
 def add_city():
     city_name = request.form['city_name']
     url = "http://api.openweathermap.org/data/2.5/weather"
-    key = "19dd2152041d2eea64e7a3cf9e5d6a3a"
+#    key = "123456789"   need to put api key here
 
     city_data = get_city_data(url, key, city_name)
 
