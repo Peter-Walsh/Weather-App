@@ -20,6 +20,9 @@ db = SQLAlchemy(app)
 
 app.secret_key = urandom(24)
 
+# TODO YOU NEED TO PUT YOUR API KEY HERE
+weather_api_key = ""
+
 
 class City(db.Model):
 
@@ -33,9 +36,9 @@ class City(db.Model):
         return "<City name: %r >" % self.name
 
 
-def get_city_data(url, api_key, city_name):
+def get_city_data(url, city_name):
 
-    params = {'q': city_name, 'appid': api_key}
+    params = {'q': city_name, 'appid': weather_api_key}
 
     city_data = json.loads(requests.get(url, params=params).content.decode())
 
@@ -58,9 +61,8 @@ def delete_city(city_name):
 def add_city():
     city_name = request.form['city_name']
     url = "http://api.openweathermap.org/data/2.5/weather"
-#    key = "123456789"   need to put api key here
 
-    city_data = get_city_data(url, key, city_name)
+    city_data = get_city_data(url, city_name)
 
     if city_data is None:
         flash("The city doesn't exist!")
